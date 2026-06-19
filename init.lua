@@ -1,34 +1,51 @@
+local modname = core.get_current_modname()
+local S = core.get_translator(modname)
+
+local date_format = core.settings:get("better_last_login_date_format") or "mdy"
+
 local SECS_PER_DAY = 86400
 local SECS_PER_HOUR = 3600
-local format = string.format
 local floor = math.floor
 
-local function possessive(name)
-    if name:sub(-1):lower() == "s" then
-        return name .. "'"
-    else
-        return name .. "'s"
-    end
-end
+local months = {
+    S("January"), S("February"), S("March"), S("April"), S("May"), S("June"),
+    S("July"), S("August"), S("September"), S("October"), S("November"), S("December")
+}
 
 local function time_ago(diff)
     if diff < SECS_PER_HOUR then
         local minutes = floor(diff / 60)
-        return format("%d minute%s ago", minutes, minutes ~= 1 and "s" or "")
+        return S(minutes == 1 and "@1 minute ago" or "@1 minutes ago", minutes)
     elseif diff < SECS_PER_DAY then
         local hours = floor(diff / SECS_PER_HOUR)
-        return format("%d hour%s ago", hours, hours ~= 1 and "s" or "")
+        return S(hours == 1 and "@1 hour ago" or "@1 hours ago", hours)
     else
         local days = floor(diff / SECS_PER_DAY)
         if days < 30 then
-            return format("%d day%s ago", days, days ~= 1 and "s" or "")
+            return S(days == 1 and "@1 day ago" or "@1 days ago", days)
         elseif days < 365 then
-            local months = floor(days / 30)
-            return format("%d month%s ago", months, months ~= 1 and "s" or "")
+            local months_count = floor(days / 30)
+            return S(months_count == 1 and "@1 month ago" or "@1 months ago", months_count)
         else
             local years = floor(days / 365)
-            return format("%d year%s ago", years, years ~= 1 and "s" or "")
+            return S(years == 1 and "@1 year ago" or "@1 years ago", years)
         end
+    end
+end
+
+local function format_date(timestamp)
+    local year = tonumber(os.date("%Y", timestamp))
+    local month_num = tonumber(os.date("%m", timestamp))
+    local day = tonumber(os.date("%d", timestamp))
+
+    local month_name = months[month_num]
+
+    if date_format == "dmy" then
+        -- 14 June 2026 (international style)
+        return S("@1 @2 @3", day, month_name, year)
+    else
+        -- June 14, 2026 (default US style)
+        return S("@1 @2, @3", month_name, day, year)
     end
 end
 
@@ -39,19 +56,17 @@ local function handle_last_login(name, param)
 
     local auth = core.get_auth_handler().get_auth(param)
     if not auth or not auth.last_login or auth.last_login == -1 then
-        return false, format("%s has never logged in.", param)
+        return false, S("@1 has never logged in.", param)
     end
 
     local now = os.time()
     local diff = os.difftime(now, auth.last_login)
-    local formatted_time = os.date("!%B %d, %Y - %H:%M UTC", auth.last_login)
+    local formatted_time = format_date(auth.last_login) .. os.date(" - %H:%M UTC", auth.last_login)
     local ago_str = time_ago(diff)
 
-    return true, format("%s last login was %s (%s)", possessive(param), formatted_time, ago_str)
+    return true, S("@1 last logged in on @2 (@3)", param, formatted_time, ago_str)
 end
 
 core.override_chatcommand("last-login", {
-    description = "Show when a player last logged in",
-    params = "[playername]",
     func = handle_last_login,
 })

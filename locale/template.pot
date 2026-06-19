@@ -1,0 +1,81 @@
+# Command feedback
+msgid "@1 has never logged in."
+msgstr ""
+
+msgid "@1 last logged in on @2 (@3)"
+msgstr ""
+
+# Date formats
+msgid "@1 @2 @3"
+msgstr ""
+
+msgid "@1 @2, @3"
+msgstr ""
+
+# Time ago strings
+msgid "@1 minute ago"
+msgstr ""
+
+msgid "@1 minutes ago"
+msgstr ""
+
+msgid "@1 hour ago"
+msgstr ""
+
+msgid "@1 hours ago"
+msgstr ""
+
+msgid "@1 day ago"
+msgstr ""
+
+msgid "@1 days ago"
+msgstr ""
+
+msgid "@1 month ago"
+msgstr ""
+
+msgid "@1 months ago"
+msgstr ""
+
+msgid "@1 year ago"
+msgstr ""
+
+msgid "@1 years ago"
+msgstr ""
+
+# Month names
+msgid "January"
+msgstr ""
+
+msgid "February"
+msgstr ""
+
+msgid "March"
+msgstr ""
+
+msgid "April"
+msgstr ""
+
+msgid "May"
+msgstr ""
+
+msgid "June"
+msgstr ""
+
+msgid "July"
+msgstr ""
+
+msgid "August"
+msgstr ""
+
+msgid "September"
+msgstr ""
+
+msgid "October"
+msgstr ""
+
+msgid "November"
+msgstr ""
+
+msgid "December"
+msgstr ""
