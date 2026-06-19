@@ -1,3 +1,7 @@
+msgid ""
+msgstr ""
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
 # Command feedback
 msgid "@1 has never logged in."
 msgstr ""
@@ -14,34 +18,29 @@ msgstr ""
 
 # Time ago strings
 msgid "@1 minute ago"
-msgstr ""
-
-msgid "@1 minutes ago"
-msgstr ""
+msgid_plural "@1 minutes ago"
+msgstr[0] ""
+msgstr[1] ""
 
 msgid "@1 hour ago"
-msgstr ""
-
-msgid "@1 hours ago"
-msgstr ""
+msgid_plural "@1 hours ago"
+msgstr[0] ""
+msgstr[1] ""
 
 msgid "@1 day ago"
-msgstr ""
-
-msgid "@1 days ago"
-msgstr ""
+msgid_plural "@1 days ago"
+msgstr[0] ""
+msgstr[1] ""
 
 msgid "@1 month ago"
-msgstr ""
-
-msgid "@1 months ago"
-msgstr ""
+msgid_plural "@1 months ago"
+msgstr[0] ""
+msgstr[1] ""
 
 msgid "@1 year ago"
-msgstr ""
-
-msgid "@1 years ago"
-msgstr ""
+msgid_plural "@1 years ago"
+msgstr[0] ""
+msgstr[1] ""
 
 # Month names
 msgid "January"
