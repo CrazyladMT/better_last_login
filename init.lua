@@ -1,5 +1,5 @@
 local modname = core.get_current_modname()
-local S = core.get_translator(modname)
+local S, PS = core.get_translator(modname)
 
 local date_format = core.settings:get("better_last_login_date_format") or "mdy"
 
@@ -15,20 +15,20 @@ local months = {
 local function time_ago(diff)
     if diff < SECS_PER_HOUR then
         local minutes = floor(diff / 60)
-        return S(minutes == 1 and "@1 minute ago" or "@1 minutes ago", minutes)
+        return PS("@1 minute ago", "@1 minutes ago", minutes, tostring(minutes))
     elseif diff < SECS_PER_DAY then
         local hours = floor(diff / SECS_PER_HOUR)
-        return S(hours == 1 and "@1 hour ago" or "@1 hours ago", hours)
+        return PS("@1 hour ago", "@1 hours ago", hours, tostring(hours))
     else
         local days = floor(diff / SECS_PER_DAY)
         if days < 30 then
-            return S(days == 1 and "@1 day ago" or "@1 days ago", days)
+            return PS("@1 day ago", "@1 days ago", days, tostring(days))
         elseif days < 365 then
             local months_count = floor(days / 30)
-            return S(months_count == 1 and "@1 month ago" or "@1 months ago", months_count)
+            return PS("@1 month ago", "@1 months ago", months_count, tostring(months_count))
         else
             local years = floor(days / 365)
-            return S(years == 1 and "@1 year ago" or "@1 years ago", years)
+            return PS("@1 year ago", "@1 years ago", years, tostring(years))
         end
     end
 end
