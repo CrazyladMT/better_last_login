@@ -34,9 +34,9 @@ local function time_ago(diff)
 end
 
 local function format_date(timestamp)
-    local year = tonumber(os.date("%Y", timestamp))
-    local month_num = tonumber(os.date("%m", timestamp))
-    local day = tonumber(os.date("%d", timestamp))
+    local year = tonumber(os.date("!%Y", timestamp))
+    local month_num = tonumber(os.date("!%m", timestamp))
+    local day = tonumber(os.date("!%d", timestamp))
 
     local month_name = months[month_num]
 
@@ -61,7 +61,7 @@ local function handle_last_login(name, param)
 
     local now = os.time()
     local diff = os.difftime(now, auth.last_login)
-    local formatted_time = format_date(auth.last_login) .. os.date(" - %H:%M UTC", auth.last_login)
+    local formatted_time = format_date(auth.last_login) .. os.date("! - %H:%M UTC", auth.last_login)
     local ago_str = time_ago(diff)
 
     return true, S("@1 last logged in on @2 (@3)", param, formatted_time, ago_str)
