@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 # Command feedback
 msgid "@1 has never logged in."
@@ -10,9 +10,11 @@ msgid "@1 last logged in on @2 (@3)"
 msgstr ""
 
 # Date formats
+# @1: day, @2: Month (name), @3: Year
 msgid "@1 @2 @3"
 msgstr ""
 
+# @1: Month (name), @2: day, @3: Year
 msgid "@1 @2, @3"
 msgstr ""
 
