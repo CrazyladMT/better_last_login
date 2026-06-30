@@ -49,10 +49,14 @@ local function format_date(timestamp)
     end
 end
 
+local normalize_name = core.get_modpath("canonical_name") and canonical_name.get or function () end
+
 local function handle_last_login(name, param)
     if param == "" then
         param = name
     end
+
+    param = normalize_name(param) or param
 
     local auth = core.get_auth_handler().get_auth(param)
     if not auth or not auth.last_login or auth.last_login == -1 then
